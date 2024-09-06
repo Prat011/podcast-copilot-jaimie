@@ -13,7 +13,7 @@ import { handleWebSocketOpenEvent, captureAudio } from './AudioInputHandling';
 
 const AIPanel: React.FC = () => {
   const [client, setClient] = useState<HumeClient | null>(null);
-  const [socket, setSocket] = useState<HumeClient.empathicVoice.chat.Socket | null>(null);
+  const [socket, setSocket] = useState<Hume.empathicVoice.chat.ChatSocket | null>(null);
 
   useEffect(() => {
     const initHume = async () => {

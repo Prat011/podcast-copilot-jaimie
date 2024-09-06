@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { StopCircleIcon, MicIcon } from 'lucide-react';
 import { convertBlobToBase64, getAudioStream, ensureSingleValidAudioTrack, getBrowserSupportedMimeType } from 'hume';
+import { ChatSocket } from 'hume/api/resources/empathicVoice/resources/chat';
 
 interface ControlsProps {
-  socket: WebSocket | null;
+  socket: ChatSocket | null;
 }
 
 const Controls: React.FC<ControlsProps> = ({ socket }) => {
@@ -24,7 +25,7 @@ const Controls: React.FC<ControlsProps> = ({ socket }) => {
       if (data.size < 1) return;
       const encodedAudioData = await convertBlobToBase64(data);
       const audioInput = { data: encodedAudioData };
-      socket.send(JSON.stringify({ type: 'audio_input', ...audioInput }));
+      socket.sendUserInput(JSON.stringify({ type: 'audio_input', ...audioInput }));
     };
 
     recorder.start(100);
